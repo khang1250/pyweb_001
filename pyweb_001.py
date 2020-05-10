@@ -115,14 +115,14 @@ def addOrder():
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
-    if ("SST" in request.args  and "Date" in request.args and "StoreM" in request.args and "Total" in request.args):
-        sst = request.args.get("SST")
-        date = request.args.get("Date")
-        sm = request.args.get("StoreM")
-        for Products in  product:
-                    total = total + int(Products["price"])*int(pPrice)
-        collection = db.OrderList
-        lpro =  collection.find()
-    return render_template("report.html", productList = lpro)
+    global vtotal
+    vtotal = 0
+    collection = db.OrderList
+    lpro = collection.find()
+    for x in collection.find():
+        vtotal = vtotal + int(x["total"])
+    newReport = {"total" : vtotal}
+    db.report.insert_one(newReport)
+    return render_template("report.html", orderList = lpro, total = newReport)
     
 
