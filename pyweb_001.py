@@ -34,7 +34,7 @@ db =  cluster.ATN  # cluster["ATN"]
 
 @app.route('/')
 def  index():
-    return render_template("index.html")
+    return render_template("login.html")
 
 
 @app.route('/home')
@@ -124,5 +124,7 @@ def report():
     newReport = {"total" : vtotal}
     db.report.insert_one(newReport)
     return render_template("report.html", orderList = lpro, total = newReport)
+    
+
     
 
