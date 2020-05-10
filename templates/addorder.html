@@ -1,0 +1,38 @@
+{% extends 'base-layout.html' %}
+
+{% block header %}
+ 
+      <div class="col-4">
+  <h1>{% block title %} ADD new Order{% endblock %}</h1>
+  </div>
+
+{% endblock %}
+
+{% block content %}
+    <hr>
+    <div class="container">
+      <div class="col-4">
+        <form action="/addOrder" method="GET">
+            <div class="form-group">
+                <label for="orderid">Order ID</label>
+                <input type="text" class="form-control" id="orderid" name="orderid" >
+            </div>
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text" class="form-control" id="username" name="username" >
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date" >
+            </div>
+            {% for product in  productList %}
+            <div class="form-group">
+                <label for="productName">{{ product["name"] }}</label>
+                <input type="number" class="form-control" id="productName" name="productName" >
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+    </div>
+{% endblock %}
